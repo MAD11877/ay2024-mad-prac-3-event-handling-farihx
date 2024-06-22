@@ -22,25 +22,27 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        int randomInt = getIntent().getIntExtra("randomInt", 0);
+        User user = (User) getIntent().getSerializableExtra("user");
 
         TextView tvName = findViewById(R.id.titleTextView);
         TextView tvDescription = findViewById(R.id.descriptionTextView);
-        tvName.setText("Fariha Tasnim " + randomInt);
-        tvDescription.setText("MAD Developer :P");
+        tvName.setText(user.getName() + " " + user.getId());
+        tvDescription.setText(user.getDescription());
 
         Button btnFollow = findViewById(R.id.followButton);
+        btnFollow.setText(user.isFollowed() ? "UNFOLLOW" : "FOLLOW");
 
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String buttonText = btnFollow.getText().toString();
-                if (buttonText.equals("FOLLOW")) {
-                    showToast("Followed");
-                    btnFollow.setText("UNFOLLOW");
-                } else if (buttonText.equals("UNFOLLOW")) {
+                if (user.isFollowed()) {
                     showToast("Unfollowed");
                     btnFollow.setText("FOLLOW");
+                    user.setFollowed(false);
+                } else {
+                    showToast("Followed");
+                    btnFollow.setText("UNFOLLOW");
+                    user.setFollowed(true);
                 }
             }
         });

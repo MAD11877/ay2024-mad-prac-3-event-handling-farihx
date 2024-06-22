@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Random;
 
 public class ListActivity extends AppCompatActivity {
@@ -26,13 +24,15 @@ public class ListActivity extends AppCompatActivity {
                 Random random = new Random();
                 int randomInt = random.nextInt(999999);
 
+                User user = new User("Fariha Tasnim", "MAD Developer :P", randomInt, false);
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
                 builder.setTitle("Profile");
                 builder.setMessage("MADness");
                 builder.setPositiveButton("CLOSE", null);
                 builder.setNegativeButton("VIEW", (dialog, which) -> {
                     Intent intent = new Intent(ListActivity.this, MainActivity.class);
-                    intent.putExtra("randomInt", randomInt);
+                    intent.putExtra("user", user);
                     startActivity(intent);
                 });
                 AlertDialog dialog = builder.create();

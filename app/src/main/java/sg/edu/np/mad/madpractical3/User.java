@@ -1,6 +1,8 @@
 package sg.edu.np.mad.madpractical3;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     public String name;
     public String description;
     public int id;
@@ -19,5 +21,17 @@ public class User {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(boolean followed) {
+        this.followed = followed;
     }
 }
